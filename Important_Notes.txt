@@ -1,0 +1,79 @@
+The arm has 3 main modes, 2 of which are autonomous and one manual:
+	- Manual Arm movements
+	- Automated box pickup
+	- Automated box dropoff
+The above modes can be selected with a knob on the controller by rotating it to the appropriate position.
+
+
+*****************************************Manual Mode****************************************************
+The manual mode has control over 4 servos within the arm system:
+	- Servo 1 controls the first arm segment
+	- Servo 2 controls the second arm segment
+	- Servo 3 controls the claw
+	- Servo 4 controls the angular position of the arm
+
+To move within the manual mode, one of the joysticks is moved outside the defined deadzone.  This will result in the servo
+constantly being incremented moving the desired part of the arm.
+
+
+*****************************************Automated Box Pickup********************************************
+The pickup mode is responsible for grabbing the box and putting it to the appropriate box holder.
+
+The inputs which influence the pickup mode are:
+	- Deadman joystick
+	- Box selector
+
+The deadman joystick is held outside of the deadzone to activate the sequences of the arm to pickup the box.
+If the deadman joystick is let go of and the arm does not have the box yet or dropped it off, it will 
+return to the neutral retracted position (exception 2 seconds before box is picked up, it will pause).  
+If the box is picked up and the deadman joystick is let go of, the arm will pause in place.
+
+The box selector is used to select which holder to drop off the current box to.  The box selector will only
+change the target location for the arm if it is selected BEFORE the arm extends out to drop off a box in
+its specified holder.
+
+Manual control can be used before picking up the box incase the automated mode does not line up.
+To do this, wait until the arm finishes moving into the extended position with the claw open.  It will
+then pause for a 2 second period before closing the claws on the box.  Within the two second time interval,
+if manual mode is required the following should be done:
+	- Wait for arm to extend with claw open
+	- Once arm pauses, release deadman joystick and keep it RELEASED when switching between modes
+	- Switch to manual mode and apply desired corrections
+	- Switch back to the pickup mode while *ahem* NOT holding the joystick
+	- Once switched into pickup mode, only then move the deadman joystick to have the claw close
+	  around the box and proceed with execution of the steps
+
+If an undesired box is picked up by the arm, the user can switch to the dropoff mode any time during
+the execution and the arm will reverse its steps to place the box at the starting position.
+
+
+*****************************************Automated Box Dropoff********************************************
+The dropoff mode is responsible for grabbing the box from the appropriate box holder and dropping
+it off on the ground *gently* in front of the drone.
+
+The inputs which influence the dropoff mode are:
+	- Deadman joystick
+	- Box selector
+
+The deadman joystick is held outside of the deadzone to activate the sequences of the arm to dropoff the box.
+If the deadman joystick is let go of and the arm does not have the box yet or dropped it off, it will 
+return to the neutral retracted position (exception: 2 seconds before box is dropped off, it will pause).  
+If the box is picked up and the deadman joystick is let go of, the arm will pause in place.
+
+The box selector is used to select which holder to pickup a box from.  The box selector will only
+change the target location for the arm if it is selected BEFORE the arm extends out to pickup a box from
+its specified holder.
+
+Manual control can be used before dropping off the box incase the automated mode does not line up.
+To do this, wait until the arm finishes moving into the extended position with the claw closed.  It will
+then pause for a 2 second period before opening the claws releasing the box.  Within the two second time interval,
+if manual mode is required the following should be done:
+	- Wait for arm to extend with claw closed
+	- Once arm pauses, release deadman joystick and keep it RELEASED when switching between modes
+	- Switch to manual mode and apply desired corrections
+	- Switch back to the dropoff mode while *ahem* NOT holding the joystick
+	- Once switched into dropoff mode, only then move the deadman joystick to have the claw open
+	  releasing the box and proceed with execution of the steps
+
+If an undesired box is picked up by the arm, the user can switch to the pickup mode any time during
+the execution and the arm will reverse its steps to place the box at the desired holder.
